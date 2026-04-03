@@ -61,18 +61,18 @@
         .menu-content { display: none; animation: fadeIn 0.5s; max-width: 900px; margin: 0 auto; }
         .menu-content.active { display: block; }
         
-        .menu-category { margin-top: 35px; margin-bottom: 10px; border-bottom: 2px solid var(--accent); padding-bottom: 5px; color: var(--accent); font-size: 1.4rem; text-align: left; text-transform: uppercase; letter-spacing: 1px;}
+        .menu-category { margin-top: 40px; margin-bottom: 15px; border-bottom: 2px solid var(--accent); padding-bottom: 10px; color: var(--accent); font-size: 1.5rem; text-align: left; transition: 0.3s; text-transform: uppercase;}
         
+        /* ALIGNEMENT DES PLATS ET PRIX */
         .menu-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(255,255,255,0.2); padding: 12px 0; text-align: left; }
-        .menu-item-info { flex: 1; padding-right: 15px; }
-        .menu-item-info h4 { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; letter-spacing: 1px; margin: 0; }
-        .menu-item-info p { font-size: 0.85rem; color: #a0aabf; margin-top: 3px; font-style: italic; margin-bottom: 0;}
+        .menu-item-info { flex: 1; padding-right: 15px; min-width: 0; } /* min-width: 0 permet au texte long de se couper au lieu de déborder */
+        .menu-item-info h4 { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; letter-spacing: 1px; margin: 0; overflow-wrap: break-word; }
+        .menu-item-info p { font-size: 0.85rem; color: #a0aabf; margin-top: 3px; font-style: italic; margin-bottom: 0; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word;} /* Force le retour à la ligne des mots très longs */
         .menu-price { font-weight: 700; color: var(--white); font-size: 1.2rem; white-space: nowrap; text-align: right;}
-        
         .fait-maison { text-align: center; font-style: italic; color: var(--accent); margin-bottom: 20px; font-size: 1.1rem; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* ================= HORAIRES (CENTRAGE ABSOLU) ================= */
+        /* ================= HORAIRES (CENTRAGE CORRIGÉ) ================= */
         .horaires-container { max-width: 800px; margin: 0 auto; background: var(--white); padding: 50px; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
         .schedule-row { display: flex; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--bg-gray); }
         .schedule-row:last-child { border-bottom: none; }
@@ -173,9 +173,9 @@
             /* ESPACE RÉDUIT SUR MOBILE */
             .menu-category { margin-top: 20px; margin-bottom: 5px; padding-bottom: 5px; font-size: 1.3rem; }
             
-            /* ALIGNEMENT VERTICAL TEXTE/PRIX SUR MOBILE */
+            /* ALIGNEMENT VERTICAL TEXTE/PRIX SUR MOBILE - min-width: 0 pour forcer le retour ligne du long texte */
             .menu-item { flex-direction: row; align-items: center; padding: 10px 0; border-bottom: 1px dashed rgba(255,255,255,0.2); }
-            .menu-item-info { flex: 1; padding-right: 10px; width: auto; }
+            .menu-item-info { flex: 1; padding-right: 10px; min-width: 0; }
             .menu-item-info h4 { font-size: 1rem; margin: 0; }
             .menu-item-info p { margin-top: 3px; font-size: 0.8rem; margin-bottom: 0;}
             .menu-price { align-self: center; margin-left: 10px; font-size: 1.1rem; color: var(--accent); margin-top: 0;}
@@ -567,7 +567,7 @@
                 d.description = document.getElementById('descPlat').value; 
                 d.prix = document.getElementById('prixPlat').value; 
             }
-            
+
             await addDoc(collection(db, "plats"), d);
             e.target.reset();
             document.querySelectorAll('.dynamic-inputs').forEach(el => el.innerHTML = '');
@@ -583,7 +583,7 @@
             const formatPrix = (prix) => {
                 if (!prix) return '';
                 let strPrix = String(prix).trim();
-                if (strPrix === '' || strPrix === '0') return ''; 
+                if (strPrix === '' || strPrix === '0') return ''; // Ignore si c'est '0' ou vide
                 if (/[€$£¥]/.test(strPrix)) return strPrix;
                 return strPrix + ' €';
             };
@@ -605,17 +605,23 @@
                         let s = `<h4 style="color: var(--accent); text-align: center; margin-top: 15px; margin-bottom: 5px; font-size: 1.2rem; letter-spacing: 1px; text-transform: uppercase;">${title}</h4>`;
                         items.forEach(it => {
                             let descHtml = it.desc ? `<p style="font-size: 0.85rem; color: #a0aabf; margin-top: 3px; font-style: italic; margin-bottom: 0;">${it.desc}</p>` : '';
+                            // AFFICHAGE ET ALIGNEMENT CORRECT DU NOM + DESC + PRIX DE LA FORMULE
                             s += `<div class="menu-item"><div class="menu-item-info"><h4>${it.nom}</h4>${descHtml}</div><div class="menu-price">${formatPrix(it.prix)}</div></div>`;
                         });
                         return s;
                     };
                     html += renderS('ENTRÉES', p.detailsFormule.entrees) + renderS('PLATS', p.detailsFormule.plats) + renderS('DESSERTS', p.detailsFormule.desserts) + `</div>`;
-                } else if (p.prixTailles) {
-                    let tailles = [];
-                    if (formatPrix(p.prixTailles.cl25)) tailles.push(`25cl : ${formatPrix(p.prixTailles.cl25)}`);
-                    if (formatPrix(p.prixTailles.cl33)) tailles.push(`33cl : ${formatPrix(p.prixTailles.cl33)}`);
-                    if (formatPrix(p.prixTailles.cl50)) tailles.push(`50cl : ${formatPrix(p.prixTailles.cl50)}`);
-                    let prixHtml = tailles.join(' / ');
+                } else if (p.sousCategorie === 'biere' || p.sousCategorie === 'sans_alcool') {
+                    let prixHtml = '';
+                    if (p.prixTailles) {
+                        let tailles = [];
+                        if (formatPrix(p.prixTailles.cl25)) tailles.push(`25cl : ${formatPrix(p.prixTailles.cl25)}`);
+                        if (formatPrix(p.prixTailles.cl33)) tailles.push(`33cl : ${formatPrix(p.prixTailles.cl33)}`);
+                        if (formatPrix(p.prixTailles.cl50)) tailles.push(`50cl : ${formatPrix(p.prixTailles.cl50)}`);
+                        prixHtml = tailles.join(' / ');
+                    } else if (p.prix) {
+                        prixHtml = formatPrix(p.prix); // Fallback si l'ancien modèle était utilisé
+                    }
                     html = `<div class="menu-item"><div class="menu-item-info"><h4>${p.nom}</h4>${p.description ? `<p>${p.description}</p>` : ''}</div><div class="menu-price">${prixHtml}</div></div>`;
                 } else {
                     html = `<div class="menu-item"><div class="menu-item-info"><h4>${p.nom}</h4>${p.description ? `<p>${p.description}</p>` : ''}</div><div class="menu-price">${formatPrix(p.prix)}</div></div>`;
