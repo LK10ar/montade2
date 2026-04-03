@@ -63,7 +63,8 @@
         
         .menu-category { margin-top: 40px; margin-bottom: 15px; border-bottom: 2px solid var(--accent); padding-bottom: 10px; color: var(--accent); font-size: 1.5rem; text-align: left; transition: 0.3s;}
         
-        .menu-item { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px dashed rgba(255,255,255,0.2); padding: 15px 0; text-align: left; }
+        /* CORRECTION : align-items: center pour l'alignement vertical avec les prix */
+        .menu-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(255,255,255,0.2); padding: 15px 0; text-align: left; }
         .menu-item-info { flex: 1; padding-right: 15px; }
         .menu-item-info h4 { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; letter-spacing: 1px; }
         .menu-item-info p { font-size: 0.85rem; color: #a0aabf; margin-top: 5px; font-style: italic; }
@@ -91,7 +92,7 @@
         .address-col .address-accent { color: var(--accent); font-weight: bold; }
         
         .contact-link { color: var(--white); text-decoration: none; transition: color 0.3s ease; }
-        .contact-link:hover { color: var(--accent) !important; }
+        .contact-link:hover { color: var(--accent); }
 
         .dark-form { display: flex; flex-direction: column; gap: 15px; }
         .dark-form input { width: 100%; height: 45px !important; min-height: 45px !important; padding: 0 15px !important; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; color: var(--white); font-family: inherit; font-size: 16px; box-sizing: border-box; }
@@ -103,16 +104,9 @@
         .map-frame iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; filter: invert(90%) hue-rotate(180deg) contrast(110%) brightness(90%); }
 
         /* ================= FOOTER ================= */
-        footer { background: #111827; color: rgba(255, 255, 255, 0.85); padding: 60px 20px 20px; text-align: center; }
+        footer { background: #111827; color: rgba(255, 255, 255, 0.85); padding: 60px 20px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 15px; }
         
-        /* STYLE POUR LE LOGO ROND EN FOOTER */
-        .footer-admin-logo-container {
-            margin-top: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
+        /* STYLE POUR LE LOGO ROND EN FOOTER (cliquable pour Admin) */
         .footer-round-logo {
             width: 100px;
             height: 100px;
@@ -120,14 +114,14 @@
             object-fit: cover;
             border: 4px solid var(--white);
             box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-            cursor: pointer; /* Indique que c'est cliquable */
+            cursor: pointer;
         }
         
-        .social-links { display: flex; justify-content: center; gap: 15px; margin-top: 10px; }
+        .social-links { display: flex; justify-content: center; gap: 15px; }
         .social-links a { color: var(--white); font-size: 1.5rem; transition: var(--transition); text-decoration: none;}
         .social-links a:hover { color: var(--accent); }
         
-        .footer-bottom { font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+        .footer-bottom { font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; width: 100%; }
         .creator-credit { margin-top: 10px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.85); }
         .creator-credit a { color: var(--white) !important; text-decoration: none; }
         .creator-credit a:hover { color: var(--accent) !important; }
@@ -173,12 +167,14 @@
             .menu-tabs { flex-direction: column; align-items: center; gap: 10px; }
             .tab-btn { width: 100%; max-width: 300px; }
             
-            /* RÉDUCTION DE L'ESPACE SOUS LES TITRES SUR MOBILE */
-            .menu-category { margin-bottom: 5px; padding-bottom: 5px; margin-top: 25px; }
+            /* CORRECTION RESPONSIVE : Réduction d'espace sous les titres */
+            .menu-category { margin-top: 15px; margin-bottom: 5px; padding-bottom: 5px; }
             
-            .menu-item { flex-direction: column; align-items: flex-start; padding: 10px 0; }
+            /* CORRECTION RESPONSIVE : Alignement vertical et padding réduit */
+            .menu-item { flex-direction: column; align-items: flex-start; padding: 5px 0; }
             .menu-item-info { padding-right: 0; width: 100%; }
             .menu-price { align-self: flex-end; margin-left: 0; margin-top: 5px; color: var(--accent); }
+            
             .schedule-row { flex-direction: column; text-align: center; gap: 5px; }
             .day, .activity { width: 100%; text-align: center; }
             .modal-content { padding: 20px; margin: 10px; width: 100%; }
@@ -303,13 +299,11 @@
             <p class="creator-credit">by <a href="https://www.instagram.com/uipact/" target="_blank">UIPACT</a></p>
         </div>
         
-        <div class="footer-admin-logo-container">
-            <img src="logo.jpg" alt="Logo Rond Footer" class="footer-round-logo" ondblclick="openAdminModal()" title="Double-clic pour Admin">
-            
-            <div class="social-links">
-                <a href="https://www.facebook.com/people/Le-Montad%C3%A9/61585855325055/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/lemontade_lelieu/" target="_blank"><i class="fab fa-instagram"></i></a>
-            </div>
+        <img src="logo.jpg" alt="Logo Rond Footer" class="footer-round-logo" ondblclick="openAdminModal()" title="Double-clic pour Admin">
+        
+        <div class="social-links">
+            <a href="https://www.facebook.com/people/Le-Montad%C3%A9/61585855325055/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/lemontade_lelieu/" target="_blank"><i class="fab fa-instagram"></i></a>
         </div>
     </footer>
 
@@ -365,9 +359,9 @@
                     <div class="formule-options" id="groupFormule" style="background: rgba(0,0,0,0.05); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
                         <label style="color: var(--primary); font-weight: 600; display: block;">Prix des combinaisons :</label>
                         <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
-                            <input type="text" id="prixEPD" placeholder="entrées+plats+desserts (21€)" style="flex:1;">
-                            <input type="text" id="prixEP" placeholder="entrées+plats (18€)" style="flex:1;">
-                            <input type="text" id="prixPD" placeholder="plats+desserts (18€)" style="flex:1;">
+                            <input type="text" id="prixEPD" placeholder="entrées+plats+desserts (€)" style="flex:1;">
+                            <input type="text" id="prixEP" placeholder="entrées+plats (€)" style="flex:1;">
+                            <input type="text" id="prixPD" placeholder="plats+desserts (€)" style="flex:1;">
                         </div>
                         <label style="color: var(--primary); font-weight: 600;">Générer les choix :</label>
                         <div style="display: flex; gap: 10px; margin-bottom: 15px;">
@@ -380,7 +374,7 @@
                         <div id="containerDessertsList" class="dynamic-inputs"></div>
                     </div>
 
-                    <div class="admin-form-group" id="groupPrixGlobal"><label>Prix Unique</label><input type="text" id="prixPlat" placeholder="Prix (ex: 15€)"></div>
+                    <div class="admin-form-group" id="groupPrixGlobal"><label>Prix Unique</label><input type="text" id="prixPlat" placeholder="Prix (€)"></div>
                     <button type="submit" class="admin-btn">Ajouter à la carte</button>
                 </form>
                 <div style="margin-top: 40px;"><div id="listePlatsContainer"></div></div>
@@ -400,6 +394,24 @@
             setTimeout(() => { document.getElementById(tabName).classList.add("active"); }, 10);
             evt.currentTarget.classList.add("active");
         }
+        
+        // SCRIPT BOUTON RETOUR EN HAUT (correction position cadenas inutile car logo déplacé)
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById("backToTop");
+            if (window.scrollY > 300) {
+                btn.classList.add("show");
+            } else {
+                btn.classList.remove("show");
+            }
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 15px rgba(0,0,0,0.08)';
+            }
+        });
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
         function openAdminModal() { document.getElementById('adminModal').style.display = 'flex'; }
         function closeAdminModal() { document.getElementById('adminModal').style.display = 'none'; }
         
@@ -423,7 +435,8 @@
             container.innerHTML = count > 0 ? `<strong>${placeholder}s :</strong>` : '';
             for (let i = 0; i < count; i++) {
                 const row = document.createElement('div'); row.className = 'dynamic-row';
-                row.innerHTML = `<input type="text" class="${prefix}-nom" placeholder="Nom" style="flex:2;" required><input type="text" class="${prefix}-prix" placeholder="Prix/Suppl. (€)" style="flex:1;">`;
+                // Placeholder admin avec logo Euro
+                row.innerHTML = `<input type="text" class="${prefix}-nom" placeholder="Nom" style="flex:2;" required><input type="text" class="${prefix}-prix" placeholder="Prix (€)" style="flex:1;">`;
                 container.appendChild(row);
             }
         }
@@ -431,8 +444,6 @@
         document.getElementById('nbEntrees').addEventListener('input', (e) => createInputs(e.target.value, 'containerEntreesList', 'Entrée', 'in-e'));
         document.getElementById('nbPlats').addEventListener('input', (e) => createInputs(e.target.value, 'containerPlatsList', 'Plat', 'in-p'));
         document.getElementById('nbDesserts').addEventListener('input', (e) => createInputs(e.target.value, 'containerDessertsList', 'Dessert', 'in-d'));
-        
-        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
     </script>
 
     <script type="module">
@@ -471,37 +482,42 @@
             mainCats.forEach(mc => types.forEach(t => { if(document.getElementById(`cat-${mc}-${t}`)) document.getElementById(`cat-${mc}-${t}`).innerHTML = ''; }));
             document.getElementById('listePlatsContainer').innerHTML = '';
 
+            // FONCTION POUR AJOUTER LE LOGO EURO (€) S'IL MANQUE
+            const formatPrix = (prix) => {
+                if (!prix) return '';
+                let strPrix = String(prix).trim();
+                if (strPrix === '') return '';
+                // Si le prix contient déjà € (ou une autre devise), on ne touche à rien
+                if (/[€$£¥]/.test(strPrix)) return strPrix;
+                // Sinon on ajoute le logo Euro
+                return strPrix + ' €';
+            };
+
             snap.forEach((docSnap) => {
                 const p = docSnap.data();
                 const id = docSnap.id;
                 let html = '';
                 
-                // --- FONCTION POUR AJOUTER € SI NON PRÉSENT ---
-                const formatPrix = (prix) => {
-                    if (!prix) return '';
-                    let strPrix = String(prix).trim();
-                    if (strPrix === '' || strPrix === '€') return '';
-                    return strPrix.includes('€') ? strPrix : strPrix + ' €';
-                };
-
                 if (p.sousCategorie === 'formule') {
                     html += `<div style="width: 100%; margin-bottom: 30px;"><h3 class="menu-category">${p.nom}</h3>`;
                     
-                    // CONCATÉNATION DE € POUR LES PRIX DE FORMULE
-                    if (p.prixCombos.epd) html += `<div class="menu-item"><h4>ENTRÉES + PLATS + DESSERTS</h4><div class="menu-price">${formatPrix(p.prixCombos.epd)}</div></div>`;
-                    if (p.prixCombos.ep) html += `<div class="menu-item"><h4>ENTRÉES + PLATS</h4><div class="menu-price">${formatPrix(p.prixCombos.ep)}</div></div>`;
-                    if (p.prixCombos.pd) html += `<div class="menu-item"><h4>PLATS + DESSERTS</h4><div class="menu-price">${formatPrix(p.prixCombos.pd)}</div></div>`;
+                    // Ajout logo Euro aux prix de formule
+                    if (p.prixCombos.epd) html += `<div class="menu-item"><div class="menu-item-info"><h4 style="text-transform: uppercase;">Entrée + Plat + Dessert</h4></div><div class="menu-price">${formatPrix(p.prixCombos.epd)}</div></div>`;
+                    if (p.prixCombos.ep) html += `<div class="menu-item"><div class="menu-item-info"><h4 style="text-transform: uppercase;">Entrée + Plat</h4></div><div class="menu-price">${formatPrix(p.prixCombos.ep)}</div></div>`;
+                    if (p.prixCombos.pd) html += `<div class="menu-item"><div class="menu-item-info"><h4 style="text-transform: uppercase;">Plat + Dessert</h4></div><div class="menu-price">${formatPrix(p.prixCombos.pd)}</div></div>`;
                     
                     const renderS = (title, items) => {
                         if (!items || items.length === 0) return '';
                         let s = `<h4 style="color: var(--accent); text-align: center; margin-top: 20px;">${title}</h4>`;
-                        // CONCATÉNATION DE € POUR LES LIGNES INDIVIDUELLES
-                        items.forEach(it => s += `<div class="menu-item"><h4>${it.nom}</h4><div class="menu-price">${formatPrix(it.prix)}</div></div>`);
+                        
+                        // CORRECTION ALIGNEMENT FORMULE : Ajout de la div entourant it.nom
+                        // Ajout logo Euro aux lignes individuelles de formule
+                        items.forEach(it => s += `<div class="menu-item"><div><h4>${it.nom}</h4></div><div class="menu-price">${formatPrix(it.prix)}</div></div>`);
                         return s;
                     };
                     html += renderS('ENTRÉES', p.detailsFormule.entrees) + renderS('PLATS', p.detailsFormule.plats) + renderS('DESSERTS', p.detailsFormule.desserts) + `</div>`;
                 } else {
-                    // CONCATÉNATION DE € POUR LES PLATS INDIVIDUELS
+                    // Ajout logo Euro aux plats individuels
                     html = `<div class="menu-item"><div><h4>${p.nom}</h4>${p.description ? `<p>${p.description}</p>` : ''}</div><div class="menu-price">${formatPrix(p.prix)}</div></div>`;
                 }
                 const target = document.getElementById(`cat-${p.categorie}-${p.sousCategorie}`);
@@ -512,7 +528,6 @@
                     }
                     target.innerHTML += html;
                 }
-                // AFFICHAGE ADMIN (ON GARDE LE PRIX AVEC € S'IL EST STOCKÉ COMME ÇA)
                 document.getElementById('listePlatsContainer').innerHTML += `<div class="menu-item-admin"><div><strong>${p.nom}</strong> (${p.categorie})</div><button class="delete-btn" onclick="supprimerPlat('${id}')">×</button></div>`;
             });
         });
