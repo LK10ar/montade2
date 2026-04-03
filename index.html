@@ -64,20 +64,19 @@
         .menu-category { margin-top: 40px; margin-bottom: 15px; border-bottom: 2px solid var(--accent); padding-bottom: 10px; color: var(--accent); font-size: 1.5rem; text-align: left; transition: 0.3s; text-transform: uppercase;}
         
         /* ALIGNEMENT DES PLATS ET PRIX */
-        .menu-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(255,255,255,0.2); padding: 15px 0; text-align: left; }
+        .menu-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(255,255,255,0.2); padding: 12px 0; text-align: left; }
         .menu-item-info { flex: 1; padding-right: 15px; }
         .menu-item-info h4 { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; letter-spacing: 1px; margin: 0; }
-        .menu-item-info p { font-size: 0.85rem; color: #a0aabf; margin-top: 5px; font-style: italic; }
+        .menu-item-info p { font-size: 0.85rem; color: #a0aabf; margin-top: 5px; font-style: italic; margin-bottom: 0;}
         .menu-price { font-weight: 700; color: var(--white); font-size: 1.2rem; white-space: nowrap; text-align: right;}
         .fait-maison { text-align: center; font-style: italic; color: var(--accent); margin-bottom: 20px; font-size: 1.1rem; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* ================= HORAIRES ================= */
         .horaires-container { max-width: 800px; margin: 0 auto; background: var(--white); padding: 50px; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
-        .schedule-row { display: flex; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--bg-gray); }
+        .schedule-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--bg-gray); }
         .schedule-row:last-child { border-bottom: none; }
         .day { flex: 1; font-weight: 700; color: var(--primary); text-align: left; }
-        /* CENTRAGE DES HEURES ICI */
         .hours { flex: 1; font-weight: 600; color: var(--text-main); text-align: center; } 
         .activity { flex: 1; font-size: 0.85rem; color: var(--text-light); text-align: right; font-style: italic; }
 
@@ -93,7 +92,7 @@
         .address-col .address-accent { color: var(--accent); font-weight: bold; }
         
         .contact-link { color: var(--white); text-decoration: none; transition: color 0.3s ease; }
-        .contact-link:hover { color: var(--accent) !important; }
+        .contact-link:hover { color: var(--accent); }
 
         .dark-form { display: flex; flex-direction: column; gap: 15px; }
         .dark-form input { width: 100%; height: 45px !important; min-height: 45px !important; padding: 0 15px !important; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; color: var(--white); font-family: inherit; font-size: 16px; box-sizing: border-box; }
@@ -105,22 +104,19 @@
         .map-frame iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; filter: invert(90%) hue-rotate(180deg) contrast(110%) brightness(90%); }
 
         /* ================= FOOTER ================= */
-        footer { background: #111827; color: rgba(255, 255, 255, 0.85); padding: 50px 20px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 15px; }
+        footer { background: #111827; color: rgba(255, 255, 255, 0.85); padding: 60px 20px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 15px; }
         
-        /* 1. LOGO ROND */
-        .footer-round-logo { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid var(--white); }
-        
-        /* 2. RÉSEAUX SOCIAUX EN DESSOUS */
-        .social-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 5px; }
-        .social-links a { color: var(--white); font-size: 1.8rem; transition: var(--transition); text-decoration: none;}
+        .footer-round-logo { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid var(--white); box-shadow: 0 4px 8px rgba(0,0,0,0.3); cursor: pointer; transition: 0.3s; }
+        .footer-round-logo:hover { border-color: var(--accent); transform: scale(1.05); }
+
+        .social-links { display: flex; justify-content: center; gap: 15px; margin-bottom: 5px;}
+        .social-links a { color: var(--white); font-size: 1.5rem; transition: var(--transition); text-decoration: none;}
         .social-links a:hover { color: var(--accent); }
         
-        /* 3. TRAIT DE SÉPARATION */
-        .footer-separator { width: 80%; max-width: 400px; height: 1px; background: rgba(255,255,255,0.1); margin: 10px 0; }
-        
-        /* 4. COPYRIGHT & CADENAS */
-        .footer-bottom { font-size: 0.9rem; width: 100%; }
-        .creator-credit { margin-top: 5px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.85); }
+        .footer-separator { width: 80%; max-width: 400px; height: 1px; background: rgba(255,255,255,0.1); margin: 5px 0; }
+
+        .footer-bottom { font-size: 0.9rem; width: 100%; margin-top: 5px;}
+        .creator-credit { margin-top: 10px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.85); }
         .creator-credit a { color: var(--white) !important; text-decoration: none; transition: 0.3s; }
         .creator-credit a:hover { color: var(--accent) !important; }
 
@@ -149,7 +145,7 @@
 
         .formule-options { display: none; background: rgba(0,0,0,0.05); padding: 15px; border-radius: 8px; margin-bottom: 15px; }
         .dynamic-inputs { margin-top: 10px; padding-left: 10px; border-left: 2px solid var(--accent); }
-        .dynamic-row { display: flex; gap: 10px; margin-bottom: 8px; }
+        .dynamic-row { display: flex; gap: 10px; margin-bottom: 8px; flex-wrap: wrap;}
         .dynamic-row input { margin-bottom: 0 !important; }
 
         /* ================= RESPONSIVE ================= */
@@ -161,25 +157,32 @@
             .hero-content h1 { font-size: 2.8rem; }
             .concept-grid { grid-template-columns: 1fr; }
             .contact-grid-dark { grid-template-columns: 1fr; text-align: center; }
+            
+            /* CENTRAGE CONTACT MOBILE */
             .address-col { text-align: center; }
+            .address-col p { justify-content: center; text-align: center; }
+            .address-col i { margin-right: 5px; }
+
             .menu-section { width: 95%; padding: 40px 15px; margin: 20px auto; }
             .menu-tabs { flex-direction: column; align-items: center; gap: 10px; }
             .tab-btn { width: 100%; max-width: 300px; padding: 12px; }
             
-            /* RÉDUCTION DE L'ESPACE SOUS LES TITRES SUR MOBILE */
-            .menu-category { margin-top: 20px; margin-bottom: 5px; padding-bottom: 5px; font-size: 1.3rem;}
+            /* RÉDUCTION DES ESPACES MENU MOBILE */
+            .menu-category { margin-top: 20px; margin-bottom: 5px; padding-bottom: 5px; font-size: 1.3rem; }
             
-            /* ALIGNEMENT PRIX-NOM SUR MOBILE : On garde un flex-row pour ne pas que le prix tombe ! */
-            .menu-item { flex-direction: row; align-items: center; padding: 10px 0; }
-            .menu-item-info { padding-right: 10px; width: auto; }
-            .menu-price { align-self: center; margin-left: auto; margin-top: 0; }
+            /* ALIGNEMENT VERTICAL PARFAIT PRIX/TEXTE MOBILE */
+            .menu-item { flex-direction: row; align-items: center; padding: 10px 0; border-bottom: 1px dashed rgba(255,255,255,0.2); }
+            .menu-item-info { flex: 1; padding-right: 10px; width: auto; }
+            .menu-item-info h4 { font-size: 1rem; margin: 0; }
+            .menu-item-info p { margin-top: 3px; font-size: 0.8rem; }
+            .menu-price { align-self: center; margin-left: 10px; font-size: 1.1rem; color: var(--accent); }
             
+            /* HORAIRES MOBILE */
             .schedule-row { flex-direction: column; text-align: center; gap: 5px; }
             .day, .hours, .activity { width: 100%; text-align: center; flex: auto; }
             
             .modal-content { padding: 20px; margin: 10px; width: 100%; }
             .admin-form-group.flex-container { flex-direction: column; gap: 10px; }
-            .dynamic-row { flex-direction: column; gap: 5px; }
         }
     </style>
 </head>
@@ -300,7 +303,7 @@
     </section>
     
     <footer>
-        <img src="logo.jpg" alt="Logo Rond Footer" class="footer-round-logo">
+        <img src="logo.jpg" alt="Logo Rond Footer" class="footer-round-logo" ondblclick="openAdminModal()" title="Double-clic pour Admin">
         
         <div class="social-links">
             <a href="https://www.facebook.com/people/Le-Montad%C3%A9/61585855325055/" target="_blank"><i class="fab fa-facebook-f"></i></a>
@@ -310,9 +313,7 @@
         <div class="footer-separator"></div>
 
         <div class="footer-bottom">
-            <p>© 2026 Le Montadé - Tous droits réservés. 
-                <i class="fas fa-lock" onclick="openAdminModal()" style="cursor: pointer; opacity: 0.3; margin-left: 10px;" title="Admin"></i>
-            </p>
+            <p>© 2026 Le Montadé - Tous droits réservés.</p>
             <p class="creator-credit">by <a href="https://www.instagram.com/uipact/" target="_blank">UIPACT</a></p>
         </div>
     </footer>
@@ -387,9 +388,9 @@
                     <div class="formule-options" id="groupFormule" style="background: rgba(0,0,0,0.05); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
                         <label style="color: var(--primary); font-weight: 600; display: block;">Prix des combinaisons :</label>
                         <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
-                            <input type="text" id="prixEPD" placeholder="Entrées + Plats + Desserts (€)" style="flex:1;">
-                            <input type="text" id="prixEP" placeholder="Entrées + Plats (€)" style="flex:1;">
-                            <input type="text" id="prixPD" placeholder="Plats + Desserts (€)" style="flex:1;">
+                            <input type="text" id="prixEPD" placeholder="Entrées + Plats + Desserts" style="flex:1;">
+                            <input type="text" id="prixEP" placeholder="Entrées + Plats" style="flex:1;">
+                            <input type="text" id="prixPD" placeholder="Plats + Desserts" style="flex:1;">
                         </div>
                         <label style="color: var(--primary); font-weight: 600;">Générer les choix :</label>
                         <div style="display: flex; gap: 10px; margin-bottom: 15px;">
@@ -462,16 +463,16 @@
         
         document.getElementById('sousCategorie').addEventListener('change', function() {
             const val = this.value;
-            document.getElementById('groupFormule').style.display = (val === 'formule') ? 'block' : 'none';
-            document.getElementById('groupBoissons').style.display = (val === 'biere' || val === 'sans_alcool') ? 'block' : 'none';
-            document.getElementById('groupVin').style.display = (val === 'vin') ? 'block' : 'none';
+            const isF = val === 'formule';
+            const isB = val === 'biere' || val === 'sans_alcool';
+            const isV = val === 'vin';
+
+            document.getElementById('groupFormule').style.display = isF ? 'block' : 'none';
+            document.getElementById('groupBoissons').style.display = isB ? 'block' : 'none';
+            document.getElementById('groupVin').style.display = isV ? 'block' : 'none';
             
-            if (val === 'formule' || val === 'biere' || val === 'sans_alcool') {
-                document.getElementById('groupPrixGlobal').style.display = 'none';
-            } else {
-                document.getElementById('groupPrixGlobal').style.display = 'block';
-            }
-            document.getElementById('groupDesc').style.display = (val === 'formule') ? 'none' : 'block';
+            document.getElementById('groupDesc').style.display = isF ? 'none' : 'block';
+            document.getElementById('groupPrixGlobal').style.display = (isF || isB) ? 'none' : 'block';
         });
         
         function createInputs(count, containerId, placeholder, prefix) {
@@ -479,7 +480,12 @@
             container.innerHTML = count > 0 ? `<p style="margin: 10px 0 5px; font-weight: bold; font-size: 0.9rem;">${placeholder}s :</p>` : '';
             for (let i = 0; i < count; i++) {
                 const row = document.createElement('div'); row.className = 'dynamic-row';
-                row.innerHTML = `<input type="text" class="${prefix}-nom" placeholder="Nom" style="flex:2;" required><input type="text" class="${prefix}-prix" placeholder="Prix (€)" style="flex:1;">`;
+                // AJOUT DU CHAMP DESCRIPTION POUR CHAQUE ENTRÉE/PLAT/DESSERT
+                row.innerHTML = `
+                    <input type="text" class="${prefix}-n" placeholder="Nom" style="flex:2; min-width:120px;" required>
+                    <input type="text" class="${prefix}-desc" placeholder="Desc (Optionnel)" style="flex:2; min-width:120px;">
+                    <input type="text" class="${prefix}-p" placeholder="Prix (€)" style="flex:1; min-width:70px;">
+                `;
                 container.appendChild(row);
             }
         }
@@ -507,20 +513,25 @@
         document.getElementById('addPlatForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const sc = document.getElementById('sousCategorie').value;
-            let nom = document.getElementById('nomPlat').value;
+            let nomVal = document.getElementById('nomPlat').value;
             let d = { categorie: document.getElementById('categorie').value, sousCategorie: sc, dateAjout: new Date() };
             
             if (sc === 'vin') {
-                d.nom = `${document.getElementById('couleurVin').value} : ${nom}`;
+                d.nom = `${document.getElementById('couleurVin').value} : ${nomVal}`;
                 d.description = document.getElementById('descPlat').value; 
                 d.prix = document.getElementById('prixPlat').value;
             } else if (sc === 'formule') {
-                d.nom = nom;
-                const getItems = (p) => Array.from(document.querySelectorAll(`.${p}-nom`)).map((el, i) => ({ nom: el.value, prix: document.querySelectorAll(`.${p}-prix`)[i].value }));
+                d.nom = nomVal;
+                // ENREGISTREMENT DES DESCRIPTIONS SOUS LES PLATS DE LA FORMULE
+                const getItems = (p) => Array.from(document.querySelectorAll(`.${p}-n`)).map((el, i) => ({ 
+                    nom: el.value, 
+                    desc: document.querySelectorAll(`.${p}-desc`)[i] ? document.querySelectorAll(`.${p}-desc`)[i].value : '',
+                    prix: document.querySelectorAll(`.${p}-p`)[i].value 
+                }));
                 d.prixCombos = { epd: document.getElementById('prixEPD').value, ep: document.getElementById('prixEP').value, pd: document.getElementById('prixPD').value };
                 d.detailsFormule = { entrees: getItems('in-e'), plats: getItems('in-p'), desserts: getItems('in-d') };
             } else if (sc === 'biere' || sc === 'sans_alcool') {
-                d.nom = nom;
+                d.nom = nomVal;
                 d.description = document.getElementById('descPlat').value;
                 d.prixTailles = {
                     cl25: document.getElementById('prix25cl').value,
@@ -528,11 +539,11 @@
                     cl50: document.getElementById('prix50cl').value
                 };
             } else { 
-                d.nom = nom;
+                d.nom = nomVal;
                 d.description = document.getElementById('descPlat').value; 
                 d.prix = document.getElementById('prixPlat').value; 
             }
-            
+
             await addDoc(collection(db, "plats"), d);
             e.target.reset();
             document.querySelectorAll('.dynamic-inputs').forEach(el => el.innerHTML = '');
@@ -545,12 +556,13 @@
             mainCats.forEach(mc => types.forEach(t => { if(document.getElementById(`cat-${mc}-${t}`)) document.getElementById(`cat-${mc}-${t}`).innerHTML = ''; }));
             document.getElementById('listePlatsContainer').innerHTML = '';
 
+            // FONCTION QUI FORCE LE SYMBOLE EURO
             const formatPrix = (prix) => {
                 if (!prix) return '';
                 let strPrix = String(prix).trim();
                 if (strPrix === '' || strPrix === '0') return ''; 
                 if (/[€$£¥]/.test(strPrix)) return strPrix;
-                return strPrix + ' €';
+                return strPrix + ' €';-
             };
 
             snap.forEach((docSnap) => {
@@ -568,7 +580,11 @@
                     const renderS = (title, items) => {
                         if (!items || items.length === 0) return '';
                         let s = `<h4 style="color: var(--accent); text-align: center; margin-top: 15px; margin-bottom: 5px; font-size: 1.2rem; letter-spacing: 1px; text-transform: uppercase;">${title}</h4>`;
-                        items.forEach(it => s += `<div class="menu-item"><div class="menu-item-info"><h4>${it.nom}</h4></div><div class="menu-price">${formatPrix(it.prix)}</div></div>`);
+                        items.forEach(it => {
+                            let descHtml = it.desc ? `<p style="font-size: 0.85rem; color: #a0aabf; margin-top: 3px; font-style: italic;">${it.desc}</p>` : '';
+                            // AFFICHAGE ET ALIGNEMENT CORRECT DU NOM + DESC + PRIX DE LA FORMULE
+                            s += `<div class="menu-item"><div class="menu-item-info"><h4>${it.nom}</h4>${descHtml}</div><div class="menu-price">${formatPrix(it.prix)}</div></div>`;
+                        });
                         return s;
                     };
                     html += renderS('ENTRÉES', p.detailsFormule.entrees) + renderS('PLATS', p.detailsFormule.plats) + renderS('DESSERTS', p.detailsFormule.desserts) + `</div>`;
@@ -580,6 +596,8 @@
                         if (formatPrix(p.prixTailles.cl33)) tailles.push(`33cl : ${formatPrix(p.prixTailles.cl33)}`);
                         if (formatPrix(p.prixTailles.cl50)) tailles.push(`50cl : ${formatPrix(p.prixTailles.cl50)}`);
                         prixHtml = tailles.join(' / ');
+                    } else if (p.prix) {
+                        prixHtml = formatPrix(p.prix); // Fallback si l'ancien modèle était utilisé
                     }
                     html = `<div class="menu-item"><div class="menu-item-info"><h4>${p.nom}</h4>${p.description ? `<p>${p.description}</p>` : ''}</div><div class="menu-price">${prixHtml}</div></div>`;
                 } else {
