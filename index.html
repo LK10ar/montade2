@@ -63,20 +63,22 @@
         
         .menu-category { margin-top: 40px; margin-bottom: 15px; border-bottom: 2px solid var(--accent); padding-bottom: 10px; color: var(--accent); font-size: 1.5rem; text-align: left; transition: 0.3s; text-transform: uppercase;}
         
+        /* ALIGNEMENT DES PLATS ET PRIX */
         .menu-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(255,255,255,0.2); padding: 15px 0; text-align: left; }
         .menu-item-info { flex: 1; padding-right: 15px; }
         .menu-item-info h4 { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; letter-spacing: 1px; margin: 0; }
         .menu-item-info p { font-size: 0.85rem; color: #a0aabf; margin-top: 5px; font-style: italic; }
-        .menu-price { font-weight: 700; color: var(--white); font-size: 1.2rem; white-space: nowrap;}
+        .menu-price { font-weight: 700; color: var(--white); font-size: 1.2rem; white-space: nowrap; text-align: right;}
         .fait-maison { text-align: center; font-style: italic; color: var(--accent); margin-bottom: 20px; font-size: 1.1rem; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* ================= HORAIRES (CENTRAGE CORRIGÉ) ================= */
+        /* ================= HORAIRES ================= */
         .horaires-container { max-width: 800px; margin: 0 auto; background: var(--white); padding: 50px; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
-        .schedule-row { display: flex; align-items: center; justify-content: center; padding: 15px 0; border-bottom: 1px solid var(--bg-gray); }
+        .schedule-row { display: flex; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--bg-gray); }
         .schedule-row:last-child { border-bottom: none; }
         .day { flex: 1; font-weight: 700; color: var(--primary); text-align: left; }
-        .hours { flex: 1; font-weight: 600; color: var(--text-main); text-align: center; } /* Centrage forcé */
+        /* CENTRAGE DES HEURES ICI */
+        .hours { flex: 1; font-weight: 600; color: var(--text-main); text-align: center; } 
         .activity { flex: 1; font-size: 0.85rem; color: var(--text-light); text-align: right; font-style: italic; }
 
         /* ================= CONTACT ================= */
@@ -91,37 +93,38 @@
         .address-col .address-accent { color: var(--accent); font-weight: bold; }
         
         .contact-link { color: var(--white); text-decoration: none; transition: color 0.3s ease; }
-        .contact-link:hover { color: var(--accent); }
+        .contact-link:hover { color: var(--accent) !important; }
 
         .dark-form { display: flex; flex-direction: column; gap: 15px; }
         .dark-form input { width: 100%; height: 45px !important; min-height: 45px !important; padding: 0 15px !important; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; color: var(--white); font-family: inherit; font-size: 16px; box-sizing: border-box; }
         .dark-form input[type="datetime-local"] { display: flex !important; align-items: center !important; position: relative; }
         .dark-form input:focus { outline: none; border-color: var(--accent); background: rgba(255, 255, 255, 0.1); }
-        
-        /* Personnalisation calendrier */
-        .dark-form input[type="datetime-local"]::-webkit-calendar-picker-indicator { 
-            filter: invert(1); cursor: pointer; 
-            /* Remplacement par l'icône fournie en background si possible, ou juste inverser la couleur par défaut */
-        }
-        
+        .dark-form input[type="datetime-local"]::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }
+
         .map-frame { position: relative; width: 100%; height: 100%; min-height: 400px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
         .map-frame iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; filter: invert(90%) hue-rotate(180deg) contrast(110%) brightness(90%); }
 
         /* ================= FOOTER ================= */
-        footer { background: #111827; color: rgba(255, 255, 255, 0.85); padding: 60px 20px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+        footer { background: #111827; color: rgba(255, 255, 255, 0.85); padding: 50px 20px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 15px; }
         
-        .footer-round-logo { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid var(--white); box-shadow: 0 4px 8px rgba(0,0,0,0.3); cursor: pointer; }
-        .social-links { display: flex; justify-content: center; gap: 15px; }
-        .social-links a { color: var(--white); font-size: 1.5rem; transition: var(--transition); text-decoration: none;}
+        /* 1. LOGO ROND */
+        .footer-round-logo { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid var(--white); }
+        
+        /* 2. RÉSEAUX SOCIAUX EN DESSOUS */
+        .social-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 5px; }
+        .social-links a { color: var(--white); font-size: 1.8rem; transition: var(--transition); text-decoration: none;}
         .social-links a:hover { color: var(--accent); }
         
-        .footer-separator { width: 50px; height: 1px; background-color: rgba(255,255,255,0.2); margin: 10px 0; }
+        /* 3. TRAIT DE SÉPARATION */
+        .footer-separator { width: 80%; max-width: 400px; height: 1px; background: rgba(255,255,255,0.1); margin: 10px 0; }
         
+        /* 4. COPYRIGHT & CADENAS */
         .footer-bottom { font-size: 0.9rem; width: 100%; }
-        .creator-credit { margin-top: 10px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.85); }
+        .creator-credit { margin-top: 5px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.85); }
         .creator-credit a { color: var(--white) !important; text-decoration: none; transition: 0.3s; }
         .creator-credit a:hover { color: var(--accent) !important; }
 
+        /* BOUTON TOP */
         .btn-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background-color: var(--accent); color: var(--white); border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 1001; opacity: 0; visibility: hidden; transition: var(--transition); }
         .btn-top.show { opacity: 1; visibility: visible; }
         .btn-top:hover { background-color: var(--accent-hover); transform: translateY(-5px); }
@@ -163,11 +166,13 @@
             .menu-tabs { flex-direction: column; align-items: center; gap: 10px; }
             .tab-btn { width: 100%; max-width: 300px; padding: 12px; }
             
-            .menu-category { margin-top: 15px; margin-bottom: 5px; padding-bottom: 5px; }
+            /* RÉDUCTION DE L'ESPACE SOUS LES TITRES SUR MOBILE */
+            .menu-category { margin-top: 20px; margin-bottom: 5px; padding-bottom: 5px; font-size: 1.3rem;}
             
-            .menu-item { flex-direction: column; align-items: flex-start; padding: 5px 0; }
-            .menu-item-info { padding-right: 0; width: 100%; }
-            .menu-price { align-self: flex-end; margin-left: 0; margin-top: 5px; color: var(--accent); }
+            /* ALIGNEMENT PRIX-NOM SUR MOBILE : On garde un flex-row pour ne pas que le prix tombe ! */
+            .menu-item { flex-direction: row; align-items: center; padding: 10px 0; }
+            .menu-item-info { padding-right: 10px; width: auto; }
+            .menu-price { align-self: center; margin-left: auto; margin-top: 0; }
             
             .schedule-row { flex-direction: column; text-align: center; gap: 5px; }
             .day, .hours, .activity { width: 100%; text-align: center; flex: auto; }
@@ -226,22 +231,22 @@
 
         <div id="midi" class="menu-content active">
             <p class="fait-maison">"Ici tout est fait maison !"</p>
-            <div id="cat-midi-formule"></div><div id="cat-midi-entree"></div><div id="cat-midi-plat"></div><div id="cat-midi-menu_enfant"></div><div id="cat-midi-dessert"></div> 
+            <div id="cat-midi-formule"></div><div id="cat-midi-entree"></div><div id="cat-midi-plat"></div><div id="cat-midi-menu_enfant"></div><div id="cat-midi-planche"></div><div id="cat-midi-dessert"></div> 
         </div>
 
         <div id="menu_du_jour" class="menu-content">
             <p class="fait-maison">"Nos suggestions du moment !"</p>
-            <div id="cat-menu_du_jour-formule"></div><div id="cat-menu_du_jour-entree"></div><div id="cat-menu_du_jour-plat"></div><div id="cat-menu_du_jour-menu_enfant"></div><div id="cat-menu_du_jour-dessert"></div> 
+            <div id="cat-menu_du_jour-formule"></div><div id="cat-menu_du_jour-entree"></div><div id="cat-menu_du_jour-plat"></div><div id="cat-menu_du_jour-menu_enfant"></div><div id="cat-menu_du_jour-planche"></div><div id="cat-menu_du_jour-dessert"></div> 
         </div>
 
         <div id="soir" class="menu-content">
             <p class="fait-maison">Commandes au comptoir 😊</p>
-            <div id="cat-soir-planche"></div><div id="cat-soir-dessert"></div>
+            <div id="cat-soir-formule"></div><div id="cat-soir-entree"></div><div id="cat-soir-plat"></div><div id="cat-soir-menu_enfant"></div><div id="cat-soir-planche"></div><div id="cat-soir-dessert"></div>
         </div>
 
         <div id="boissons" class="menu-content">
             <p class="fait-maison">Commandes au comptoir 😊</p>
-            <div id="cat-boissons-biere"></div><div id="cat-boissons-vin"></div><div id="cat-boissons-sans_alcool"></div>
+            <div id="cat-boissons-biere"></div><div id="cat-boissons-vin"></div><div id="cat-boissons-sans_alcool"></div><div id="cat-boissons-formule"></div><div id="cat-boissons-entree"></div><div id="cat-boissons-plat"></div><div id="cat-boissons-planche"></div><div id="cat-boissons-dessert"></div>
         </div>
     </section>
 
@@ -283,7 +288,7 @@
                         <input type="text" name="Nom" placeholder="Votre Nom" required>
                         <input type="email" name="email" placeholder="Votre Email" required> 
                         <input type="number" name="Personnes" placeholder="Nombre de personnes" required>
-                        <input type="datetime-local" name="Date_et_Heure" required style="height: 40px !important; min-height: 40px !important;"> 
+                        <input type="datetime-local" name="Date_et_Heure" required> 
                         <button type="submit" class="btn-reserve" style="width: 100%; margin-top: 10px;">Envoyer la demande</button>
                     </form>
                 </div>
@@ -295,7 +300,7 @@
     </section>
     
     <footer>
-        <img src="logo.jpg" alt="Logo Rond Footer" class="footer-round-logo" ondblclick="openAdminModal()" title="Double-clic pour Admin">
+        <img src="logo.jpg" alt="Logo Rond Footer" class="footer-round-logo">
         
         <div class="social-links">
             <a href="https://www.facebook.com/people/Le-Montad%C3%A9/61585855325055/" target="_blank"><i class="fab fa-facebook-f"></i></a>
@@ -305,7 +310,9 @@
         <div class="footer-separator"></div>
 
         <div class="footer-bottom">
-            <p>© 2026 Le Montadé - Tous droits réservés.</p>
+            <p>© 2026 Le Montadé - Tous droits réservés. 
+                <i class="fas fa-lock" onclick="openAdminModal()" style="cursor: pointer; opacity: 0.3; margin-left: 10px;" title="Admin"></i>
+            </p>
             <p class="creator-credit">by <a href="https://www.instagram.com/uipact/" target="_blank">UIPACT</a></p>
         </div>
     </footer>
@@ -353,11 +360,29 @@
                     </div>
                     
                     <div class="admin-form-group">
-                        <label id="labelNom">Nom de la formule / plat / boisson</label>
+                        <label id="labelNom">Nom de la formule / plat</label>
                         <input type="text" id="nomPlat" placeholder="Ex: Formule Cocotte" required>
                     </div>
 
                     <div class="admin-form-group" id="groupDesc"><label>Description</label><input type="text" id="descPlat" placeholder="Ex: Frites + Salade"></div>
+
+                    <div class="formule-options" id="groupBoissons" style="display:none; background: rgba(0,0,0,0.05); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                        <label style="color: var(--primary); font-weight: 600; display: block;">Formats (Laissez à 0 ou vide si non disponible) :</label>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <div style="flex:1;"><label style="font-size:0.75rem;">25 cl</label><input type="text" id="prix25cl" placeholder="Prix (€)"></div>
+                            <div style="flex:1;"><label style="font-size:0.75rem;">33 cl</label><input type="text" id="prix33cl" placeholder="Prix (€)"></div>
+                            <div style="flex:1;"><label style="font-size:0.75rem;">50 cl</label><input type="text" id="prix50cl" placeholder="Prix (€)"></div>
+                        </div>
+                    </div>
+
+                    <div class="formule-options" id="groupVin" style="display:none; background: rgba(0,0,0,0.05); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                        <label style="color: var(--primary); font-weight: 600; display: block;">Couleur du Vin :</label>
+                        <select id="couleurVin" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                            <option value="Rouge">Rouge</option>
+                            <option value="Blanc">Blanc</option>
+                            <option value="Rosé">Rosé</option>
+                        </select>
+                    </div>
 
                     <div class="formule-options" id="groupFormule" style="background: rgba(0,0,0,0.05); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
                         <label style="color: var(--primary); font-weight: 600; display: block;">Prix des combinaisons :</label>
@@ -384,33 +409,6 @@
                         <div id="containerEntreesList" class="dynamic-inputs"></div>
                         <div id="containerPlatsList" class="dynamic-inputs"></div>
                         <div id="containerDessertsList" class="dynamic-inputs"></div>
-                    </div>
-
-                    <div class="formule-options" id="groupBoissons" style="background: rgba(0,0,0,0.05); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-                        <label style="color: var(--primary); font-weight: 600; display: block;">Formats (Laissez à 0 ou vide si non disponible) :</label>
-                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                            <div style="flex:1;">
-                                <label style="font-size:0.75rem;">25 cl</label>
-                                <input type="text" id="prix25cl" placeholder="Prix (€)">
-                            </div>
-                            <div style="flex:1;">
-                                <label style="font-size:0.75rem;">33 cl</label>
-                                <input type="text" id="prix33cl" placeholder="Prix (€)">
-                            </div>
-                            <div style="flex:1;">
-                                <label style="font-size:0.75rem;">50 cl</label>
-                                <input type="text" id="prix50cl" placeholder="Prix (€)">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="formule-options" id="groupVin" style="background: rgba(0,0,0,0.05); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-                        <label style="color: var(--primary); font-weight: 600; display: block;">Couleur du Vin :</label>
-                        <select id="couleurVin" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
-                            <option value="Rouge">Rouge</option>
-                            <option value="Blanc">Blanc</option>
-                            <option value="Rosé">Rosé</option>
-                        </select>
                     </div>
 
                     <div class="admin-form-group" id="groupPrixGlobal"><label>Prix Unique</label><input type="text" id="prixPlat" placeholder="Prix (€)"></div>
@@ -464,7 +462,6 @@
         
         document.getElementById('sousCategorie').addEventListener('change', function() {
             const val = this.value;
-            
             document.getElementById('groupFormule').style.display = (val === 'formule') ? 'block' : 'none';
             document.getElementById('groupBoissons').style.display = (val === 'biere' || val === 'sans_alcool') ? 'block' : 'none';
             document.getElementById('groupVin').style.display = (val === 'vin') ? 'block' : 'none';
@@ -474,7 +471,6 @@
             } else {
                 document.getElementById('groupPrixGlobal').style.display = 'block';
             }
-            
             document.getElementById('groupDesc').style.display = (val === 'formule') ? 'none' : 'block';
         });
         
@@ -552,7 +548,7 @@
             const formatPrix = (prix) => {
                 if (!prix) return '';
                 let strPrix = String(prix).trim();
-                if (strPrix === '' || strPrix === '0') return ''; // Ignore si c'est '0' ou vide
+                if (strPrix === '' || strPrix === '0') return ''; 
                 if (/[€$£¥]/.test(strPrix)) return strPrix;
                 return strPrix + ' €';
             };
