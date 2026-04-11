@@ -84,8 +84,16 @@
         .section-header-dark { text-align: center; width: 100%; margin-bottom: 60px; }
         .section-header-dark h2 { font-size: 2.8rem; color: var(--accent); margin: 0 0 15px 0; display: flex; align-items: center; justify-content: center; gap: 15px; font-family: 'Playfair Display', serif; }
         .subtle-line { border: 0; border-top: 1px solid rgba(212, 175, 55, 0.4); width: 80px; margin: 0 auto; }
-        .contact-grid-dark { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; max-width: 1100px; margin: 0 auto; }
-        .contact-info-dark { display: flex; flex-direction: column; gap: 40px; }
+        
+        .contact-grid-dark { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 50px; 
+            max-width: 1100px; 
+            margin: 0 auto; 
+            align-items: stretch; /* C'est ce qui force les 2 colonnes à être identiques en hauteur */
+        }
+        
         .address-col .business-name { font-size: 1.5rem; font-weight: bold; color: var(--white); margin-bottom: 10px; font-family: 'Montserrat', sans-serif; }
         .address-col .address-line { font-size: 1.1rem; color: var(--white); margin: 0 0 5px 0; }
         .address-col .address-accent { color: var(--accent); font-weight: bold; }
@@ -93,17 +101,24 @@
         .contact-link { color: var(--white); text-decoration: none; transition: color 0.3s ease; }
         .contact-link:hover { color: var(--accent) !important; }
 
-        .dark-form { display: flex; flex-direction: column; gap: 15px; }
-        .dark-form input { width: 100%; height: 45px !important; min-height: 45px !important; padding: 0 15px !important; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; color: var(--white); font-family: inherit; font-size: 16px; box-sizing: border-box; margin: 0; -webkit-appearance: none; appearance: none; }
-        .dark-form input:focus { outline: none; border-color: var(--accent); background: rgba(255, 255, 255, 0.1); }
-        
-        .date-input-container { position: relative; width: 100%; height: 45px; }
-        .date-input-container input[type="datetime-local"] { padding-right: 40px !important; height: 45px !important; min-height: 45px !important; line-height: normal; }
-        .date-input-container i { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: var(--accent); pointer-events: none; font-size: 1.1rem;}
-        .dark-form input[type="datetime-local"]::-webkit-calendar-picker-indicator { opacity: 0; width: 100%; height: 100%; position: absolute; top: 0; left: 0; cursor: pointer; }
-
-        .map-frame { position: relative; width: 100%; height: 100%; min-height: 400px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
-        .map-frame iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; filter: invert(90%) hue-rotate(180deg) contrast(110%) brightness(90%); }
+       
+       /* LE CADRE MAGIQUE QUI SERT POUR ZENCHEF ET GOOGLE MAPS */
+        .widget-box {
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            padding: 10px; 
+            border-radius: 8px; 
+            width: 100%; 
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+        .widget-iframe {
+            width: 100%;
+            height: 550px; /* On utilise une hauteur fixe identique pour les deux au lieu de flex-grow */
+            border: none;
+            border-radius: 8px;
+        }
 
         /* ================= FOOTER ================= */
         footer { background: #111827; color: rgba(255, 255, 255, 0.85); padding: 50px 20px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 15px; }
@@ -273,9 +288,11 @@
 
     <section id="contact" class="contact-section-dark">
         <div class="section-header-dark"><h2><i class="fas fa-map-marker-alt" style="color: var(--accent);"></i> Nous Trouver</h2><hr class="subtle-line"></div>
+        
         <div class="contact-grid-dark">
-            <div class="contact-info-dark">
-               <div class="address-col">
+            
+            <div style="display: flex; flex-direction: column; height: 100%;">
+               <div class="address-col" style="margin-bottom: 30px;">
                     <p class="business-name">Le Montadé</p>
                     <p class="address-line address-accent">1 Av. de Loustallaut</p>
                     <p class="address-line">33880 Saint-Caprais-de-Bordeaux</p>
@@ -288,31 +305,35 @@
                         <a href="mailto:contact@lemontade.fr" class="contact-link">contact@lemontade.fr</a>
                     </p>
                 </div>
-                <div style="width: 100%; text-align: left;">
-                    <h3 style="color: var(--accent); margin-bottom: 20px; font-family: 'Playfair Display', serif;">Demande de Réservation</h3>
-                    <form class="dark-form" action="https://formsubmit.co/leobarrot@gmail.com" method="POST">
-                        <input type="hidden" name="_subject" value="Nouvelle Demande de Réservation !">
-                        <input type="hidden" name="_captcha" value="false">
-                        <input type="text" name="Nom" placeholder="Votre Nom" required>
-                        <input type="email" name="email" placeholder="Votre Email" required> 
-                        <input type="number" name="Personnes" placeholder="Nombre de personnes" required>
-                        <div class="date-input-container">
-                            <input type="datetime-local" name="Date_et_Heure" required> 
-                            <i class="fas fa-calendar-alt"></i>
-                        </div>
-                        <button type="submit" class="btn-reserve" style="width: 100%; margin-top: 10px;">Envoyer la demande</button>
-                    </form>
+                
+                <div style="width: 100%; text-align: left; display: flex; flex-direction: column;">
+                    <h3 style="color: var(--accent); margin-bottom: 20px; font-family: 'Playfair Display', serif;">Réserver une table</h3>
+                    
+                    <div class="widget-box">
+                        <iframe src="https://bookings.zenchef.com/results?rid=357246" 
+                                class="widget-iframe" 
+                                style="background-color: #ffffff;">
+                        </iframe>
+                    </div>
                 </div>
             </div>
-            <div class="map-col">
-                <div class="map-frame"><iframe src="https://maps.google.com/maps?q=1%20Av.%20de%20Loustallaut,%2033880%20Saint-Caprais-de-Bordeaux&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe></div>
+
+            <div style="display: flex; flex-direction: column; justify-content: flex-end; height: 100%;">
+                <div class="widget-box">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2833.844390635955!2d-0.45719662369680373!3d44.74318728123281!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd5525049b78e2df%3A0xe62c82329bc0eb9e!2s1%20Av.%20de%20Loustallaut%2C%2033880%20Saint-Caprais-de-Bordeaux!5e0!3m2!1sfr!2sfr!4v1712860241000!5m2!1sfr!2sfr" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            class="widget-iframe" 
+                            style="filter: invert(90%) hue-rotate(180deg) contrast(110%) brightness(90%);">
+                    </iframe>
+                </div>
             </div>
+            
         </div>
     </section>
     
     <footer>
-        <img src="logo.jpg" alt="Logo Rond Footer" class="footer-round-logo" ondblclick="openAdminModal()" title="Double-clic pour Admin">
-        
+       <img src="logo.jpg" alt="Logo Rond Footer" class="footer-round-logo" onclick="handleAdminDoubleTap()" title="Double-clic pour Admin">
         <div class="social-links">
             <a href="https://www.facebook.com/people/Le-Montad%C3%A9/61585855325055/" target="_blank"><i class="fab fa-facebook-f"></i></a>
             <a href="https://www.instagram.com/lemontade_lelieu/" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -460,6 +481,20 @@
 
         function openAdminModal() { document.getElementById('adminModal').style.display = 'flex'; }
         function closeAdminModal() { document.getElementById('adminModal').style.display = 'none'; }
+        
+        // RUSE POUR LE DOUBLE-CLIC SUR MOBILE (TACTILE)
+        let tapCount = 0;
+        let tapTimer;
+        function handleAdminDoubleTap() {
+            tapCount++;
+            if (tapCount === 2) {
+                openAdminModal();
+                tapCount = 0;
+                clearTimeout(tapTimer);
+            } else {
+                tapTimer = setTimeout(() => { tapCount = 0; }, 400); // 400 millisecondes pour taper 2 fois
+            }
+        }
         
         function checkPassword() {
             if (document.getElementById('passwordInput').value === "Montade2026") {
