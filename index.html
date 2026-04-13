@@ -56,7 +56,7 @@
         .menu-section { background-color: var(--primary); color: var(--white); border-radius: 20px; width: 90%; max-width: 800px; margin: 40px auto; padding: 60px 40px; }
         .menu-section .section-title { color: var(--white); }
         .menu-tabs { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
-        .tab-btn { background: transparent; color: var(--white); border: 2px solid var(--accent); padding: 10px 25px; font-size: 1rem; cursor: pointer; border-radius: 30px; font-family: 'Montserrat', sans-serif; font-weight: 600; transition: var(--transition); }
+        .tab-btn { background: transparent; color: var(--white); border: 2px solid var(--accent); padding: 10px 25px; font-size: 1rem; cursor: pointer; border-radius: 30px; font-family: 'Montserrat', sans-serif; font-weight: 600; transition: var(--transition); display: none; /* Cacher par défaut */ }
         .tab-btn.active, .tab-btn:hover { background: var(--accent); color: var(--primary); }
         .menu-content { display: none; animation: fadeIn 0.5s; max-width: 900px; margin: 0 auto; }
         .menu-content.active { display: block; }
@@ -101,7 +101,6 @@
         .contact-link { color: var(--white); text-decoration: none; transition: color 0.3s ease; }
         .contact-link:hover { color: var(--accent) !important; }
 
-       
        /* LE CADRE MAGIQUE QUI SERT POUR ZENCHEF ET GOOGLE MAPS */
         .widget-box {
             background: rgba(255, 255, 255, 0.05); 
@@ -245,31 +244,28 @@
 
     <section id="menu" class="section-padding menu-section">
         <h2 class="section-title">L'Ardoise du <span>Montadé</span></h2>
+        
         <div class="menu-tabs">
-            <button class="tab-btn active" onclick="openTab(event, 'midi')">Le Midi</button>
-            <button class="tab-btn" onclick="openTab(event, 'menu_du_jour')">Menu du Jour</button>
-            <button class="tab-btn" onclick="openTab(event, 'soir')">Le Soir (On Mange)</button>
-            <button class="tab-btn" onclick="openTab(event, 'boissons')">Le Soir (On Boit)</button>
+            <button id="btn-midi" class="tab-btn" onclick="openTab(event, 'midi')">Le Midi</button>
+            <button id="btn-menu_du_jour" class="tab-btn" onclick="openTab(event, 'menu_du_jour')">Menu du Jour</button>
+            <button id="btn-soir" class="tab-btn" onclick="openTab(event, 'soir')">Le Soir (On Mange)</button>
+            <button id="btn-boissons" class="tab-btn" onclick="openTab(event, 'boissons')">Le Soir (On Boit)</button>
         </div>
 
         <div id="midi" class="menu-content active">
-            <p class="fait-maison">"Ici tout est fait maison !"</p>
-            <div id="cat-midi-formule"></div><div id="cat-midi-entree"></div><div id="cat-midi-plat"></div><div id="cat-midi-menu_enfant"></div><div id="cat-midi-planche"></div><div id="cat-midi-dessert"></div> 
+            <div id="midi-content"></div>
         </div>
 
         <div id="menu_du_jour" class="menu-content">
-            <p class="fait-maison">"Nos suggestions du moment !"</p>
-            <div id="cat-menu_du_jour-formule"></div><div id="cat-menu_du_jour-entree"></div><div id="cat-menu_du_jour-plat"></div><div id="cat-menu_du_jour-menu_enfant"></div><div id="cat-menu_du_jour-planche"></div><div id="cat-menu_du_jour-dessert"></div> 
+            <div id="menu_du_jour-content"></div>
         </div>
 
         <div id="soir" class="menu-content">
-            <p class="fait-maison">Commandes au comptoir 😊</p>
-            <div id="cat-soir-formule"></div><div id="cat-soir-entree"></div><div id="cat-soir-plat"></div><div id="cat-soir-menu_enfant"></div><div id="cat-soir-planche"></div><div id="cat-soir-dessert"></div>
+            <div id="soir-content"></div>
         </div>
 
         <div id="boissons" class="menu-content">
-            <p class="fait-maison">Commandes au comptoir 😊</p>
-            <div id="cat-boissons-biere"></div><div id="cat-boissons-vin"></div><div id="cat-boissons-sans_alcool"></div><div id="cat-boissons-formule"></div><div id="cat-boissons-entree"></div><div id="cat-boissons-plat"></div><div id="cat-boissons-planche"></div><div id="cat-boissons-dessert"></div>
+            <div id="boissons-content"></div>
         </div>
     </section>
 
@@ -460,7 +456,13 @@
             for (i = 0; i < tablinks.length; i++) { tablinks[i].classList.remove("active"); }
             document.getElementById(tabName).style.display = "block";
             setTimeout(() => { document.getElementById(tabName).classList.add("active"); }, 10);
-            evt.currentTarget.classList.add("active");
+            
+            // Fix si l'événement existe (clic manuel) ou si on l'appelle via JS
+            if (evt && evt.currentTarget) { 
+                evt.currentTarget.classList.add("active"); 
+            } else {
+                document.getElementById('btn-' + tabName).classList.add("active");
+            }
         }
         
         window.addEventListener('scroll', () => {
@@ -617,7 +619,20 @@
         onSnapshot(query(collection(db, "plats"), orderBy("dateAjout", "asc")), (snap) => {
             const types = ['formule', 'entree', 'plat', 'menu_enfant', 'dessert', 'planche', 'biere', 'vin', 'sans_alcool'];
             const mainCats = ['midi', 'menu_du_jour', 'soir', 'boissons'];
-            mainCats.forEach(mc => types.forEach(t => { if(document.getElementById(`cat-${mc}-${t}`)) document.getElementById(`cat-${mc}-${t}`).innerHTML = ''; }));
+            
+            let contentByMainCat = {
+                'midi': { hasItems: false, html: '' },
+                'menu_du_jour': { hasItems: false, html: '' },
+                'soir': { hasItems: false, html: '' },
+                'boissons': { hasItems: false, html: '' }
+            };
+
+            mainCats.forEach(mc => {
+                types.forEach(t => {
+                    contentByMainCat[mc][t] = ''; 
+                });
+            });
+
             document.getElementById('listePlatsContainer').innerHTML = '';
 
             const formatPrix = (prix) => {
@@ -632,6 +647,8 @@
                 const p = docSnap.data();
                 const id = docSnap.id;
                 let html = '';
+                
+                contentByMainCat[p.categorie].hasItems = true;
                 
                 if (p.sousCategorie === 'formule') {
                     html += `<div style="width: 100%; margin-bottom: 30px;"><h3 class="menu-category">${p.nom}</h3>`;
@@ -661,16 +678,54 @@
                     html = `<div class="menu-item"><div class="menu-item-info"><h4>${p.nom}</h4>${p.description ? `<p>${p.description}</p>` : ''}</div><div class="menu-price">${formatPrix(p.prix)}</div></div>`;
                 }
                 
-                const target = document.getElementById(`cat-${p.categorie}-${p.sousCategorie}`);
-                if (target) {
-                    if (target.innerHTML === '' && p.sousCategorie !== 'formule') {
-                        const titles = {'entree':'Entrées','plat':'Plats / Cocotte','menu_enfant':'Menu Enfant','dessert':'Desserts','planche':'Planches & Tapas','biere':'Bières','vin':'Vin au Verre','sans_alcool':'Sans Alcool'};
-                        target.innerHTML = `<h3 class="menu-category">${titles[p.sousCategorie] || ''}</h3>`;
-                    }
-                    target.innerHTML += html;
-                }
+                contentByMainCat[p.categorie][p.sousCategorie] += html;
+
                 document.getElementById('listePlatsContainer').innerHTML += `<div class="menu-item-admin"><div><strong>${p.nom}</strong> (${p.categorie})</div><button class="delete-btn" onclick="supprimerPlat('${id}')">×</button></div>`;
             });
+
+            let firstVisibleCat = null; 
+
+            mainCats.forEach(mc => {
+                const container = document.getElementById(`${mc}-content`);
+                const btn = document.getElementById(`btn-${mc}`); 
+                
+                if(container && btn) {
+                    if (contentByMainCat[mc].hasItems) {
+                        btn.style.display = 'inline-block';
+                        if (!firstVisibleCat) firstVisibleCat = mc;
+
+                        let finalHtml = '';
+                        if (mc === 'midi') finalHtml += `<p class="fait-maison">"Ici tout est fait maison !"</p>`;
+                        else if (mc === 'menu_du_jour') finalHtml += `<p class="fait-maison">"Nos suggestions du moment !"</p>`;
+                        else if (mc === 'soir' || mc === 'boissons') finalHtml += `<p class="fait-maison">Commandes au comptoir 😊</p>`;
+
+                        const titles = {'entree':'Entrées','plat':'Plats / Cocotte','menu_enfant':'Menu Enfant','dessert':'Desserts','planche':'Planches & Tapas','biere':'Bières','vin':'Vin au Verre','sans_alcool':'Sans Alcool'};
+                        
+                        types.forEach(t => {
+                           if (contentByMainCat[mc][t] !== '') {
+                               if (t !== 'formule') {
+                                   finalHtml += `<h3 class="menu-category">${titles[t] || ''}</h3>`;
+                               }
+                               finalHtml += contentByMainCat[mc][t];
+                           }
+                        });
+                        container.innerHTML = finalHtml;
+
+                    } else {
+                         btn.style.display = 'none';
+                         container.innerHTML = '';
+                    }
+                }
+            });
+
+            if (firstVisibleCat) {
+                const activeBtn = document.querySelector('.tab-btn.active');
+                if (!activeBtn || activeBtn.style.display === 'none') {
+                    document.getElementById(`btn-${firstVisibleCat}`).click();
+                } else {
+                   openTab(null, activeBtn.id.replace('btn-', ''));
+                }
+            }
         });
         window.supprimerPlat = async (id) => { if(confirm("Supprimer ce plat ?")) await deleteDoc(doc(db, "plats", id)); };
     </script>
